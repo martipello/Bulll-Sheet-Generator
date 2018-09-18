@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.sealstudios.bullsheetgenerator2">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <meta-data
+        android:name="com.google.android.gms.version"
+        android:value="@integer/google_play_services_version" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".about"
+            android:label="@string/app_name"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".FinalListActivity"
+            android:label="@string/app_name"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".ArchiveActivity"
+            android:label="@string/app_name"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".EditListActivity"
+            android:label="@string/app_name"
+            android:parentActivityName=".ArchiveActivity" />
+        <activity
+            android:name=".intro.MyIntro"
+            android:label="@string/app_name" />
+        <activity
+            android:name=".WebViewActivity"
+            android:label="@string/app_name"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name="com.google.android.gms.ads.AdActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+            android:theme="@android:style/Theme.Translucent" />
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/title_activity_settings"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.sealstudios.bullsheetgenerator2.MainActivity" />
+        </activity>
+    </application>
+
+</manifest>

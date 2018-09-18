@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <array name="outcomes">
+        <item>Applied on company website</item>
+        <item>Applied through recruitment agency</item>
+        <item>Applied through total jobs</item>
+        <item>Applied through find a job</item>
+        <item>Applied through indeed</item>
+        <item>sent C.V</item>
+    </array>
+
+</resources>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:title="Inputs" >
+    <SwitchPreference
+        android:title="@string/ujm"
+        android:key="@string/ujmsettingkey"
+        android:summary="Get results from Find a Job"/>
+    <SwitchPreference
+        android:title="@string/totaljobs"
+        android:key="@string/totaljobssettingkey"
+        android:summary="Get results from Total Jobs"/>
+    <SwitchPreference
+        android:title="@string/indeed"
+        android:key="@string/indeedsettingkey"
+        android:summary="Get results from Indeed"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="Data" >
+
+    <Preference android:title="Delete"
+        android:key="@string/pref_delete"
+        android:summary="Deletes all saved data"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="FAQ" >
+
+        <Preference android:title="About"
+        android:summary="About the app"
+        android:key="about"/>
+
+        <Preference
+        android:title="Share"
+        android:summary="Share the app with friends"
+        android:key="share"/>
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

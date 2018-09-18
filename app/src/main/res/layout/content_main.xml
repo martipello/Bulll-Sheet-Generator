@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:showIn="@layout/activity_main">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:padding="@dimen/layout_margin"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/adView">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/layout_margin">
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/layout_margin"
+                app:layout_constraintTop_toTopOf="parent"
+                android:id="@+id/text_input_layout">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/job_description"
+                    android:maxLines="1"
+                    android:inputType="text"
+                    android:textSize="@dimen/text_size"
+                    android:id="@+id/job_description_text_view"/>
+
+            </android.support.design.widget.TextInputLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/frame_layout"
+                android:paddingLeft="@dimen/layout_margin"
+                android:paddingRight="@dimen/layout_margin"
+                app:layout_constraintTop_toBottomOf="@id/text_input_layout">
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/job_location"
+                        android:maxLines="1"
+                        android:inputType="text"
+                        android:textSize="@dimen/text_size"
+                        android:id="@+id/job_location_text_view"/>
+
+                </android.support.design.widget.TextInputLayout>
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/get_location_button"
+                    android:contentDescription="@string/job_location"
+                    android:layout_gravity="center|end"
+                    android:paddingLeft="@dimen/layout_margin"
+                    android:paddingRight="@dimen/layout_margin"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/ic_my_location_black_24dp"/>
+
+            </FrameLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/radius_text"
+                android:padding="@dimen/layout_margin"
+                android:text="@string/radius"
+                app:layout_constraintTop_toBottomOf="@id/frame_layout"
+                android:textSize="@dimen/text_size"/>
+
+            <SeekBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/seekbar"
+                android:padding="@dimen/layout_margin"
+                android:max="4"
+                app:layout_constraintTop_toBottomOf="@id/radius_text"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/dateFrom"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:text="@string/date_from"
+                android:layout_margin="@dimen/layout_margin"
+                app:layout_constraintTop_toBottomOf="@id/seekbar"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/dateTo"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/dateTo"
+                android:layout_margin="@dimen/layout_margin"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:text="@string/date_to"
+                app:layout_constraintTop_toBottomOf="@id/seekbar"
+                app:layout_constraintStart_toEndOf="@id/dateFrom"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <br.com.simplepass.loading_button_lib.customViews.CircularProgressButton
+                android:id="@+id/submit_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/circle_blue"
+                android:layout_margin="@dimen/layout_margin"
+                android:text="@string/submit"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size"
+                app:initialCornerAngle="200dp"
+                app:spinning_bar_width="4dp"
+                app:spinning_bar_color="@color/colorAccent"
+                app:spinning_bar_padding="6dp"
+                app:layout_constraintTop_toBottomOf="@id/dateFrom"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+    <com.google.android.gms.ads.AdView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/adView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:adSize="BANNER"
+        app:adUnitId="@string/banner_home_footer">
+
+    </com.google.android.gms.ads.AdView>
+
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.design.widget.CoordinatorLayout>

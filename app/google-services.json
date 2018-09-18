@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "53915401997",
+    "firebase_url": "https://bullsheet-b8f44.firebaseio.com",
+    "project_id": "bullsheet-b8f44",
+    "storage_bucket": "bullsheet-b8f44.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:53915401997:android:eb85dc792fc038cc",
+        "android_client_info": {
+          "package_name": "com.sealstudios.bullsheetgenerator2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "53915401997-8f0ikrgquhiopclnbvgvku6rv097e19v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCgxzJ5lcQTCF9UsEirRhAR0xAVVG36agY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

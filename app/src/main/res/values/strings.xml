@@ -1,0 +1,87 @@
+<resources>
+    <string name="app_name">Bull Sheet Generator</string>
+    <string name="app_short_name">Bull Sheet</string>
+
+
+    <string name="fact_string">Welcome to the Bull Sheet Generator,\nPlease read ALL of this it will only be shown once per install! But can also be found in the about screen.
+        \n PLEASE NOTE job centre staff can sometimes be low level detectives and try to quiz you on these positions
+        it is for you to check the jobs listed are suitable for you to apply for, you may
+        wish to remove some information before presenting them as your search evidence along with any other info that may not apply,
+        you should also check the dates all match as your claimant commitment requires you to look for work on a DAILY basis, this
+        application is in no means perfect or a fail safe and will not stop some job centre staff from sanctioning you for ideological
+        bull sheet reasons, but it can save you tremendous amounts of effort and time, with that in mind, please enjoy.</string>
+
+    <string name="banner_home_footer">ca-app-pub-1989939591379723/3524941899</string>
+    <string name="interstitial_full_screen">ca-app-pub-1989939591379723/5001675092</string>
+
+    <string name="empty_list">"List is empty"</string>
+
+    <string name="delete_one">Are you sure you want to delete this list?</string>
+    <string name="delete_many">Are you sure you want to delete these %d lists?</string>
+
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+
+    <!-- Strings related to Settings -->
+    <!-- Example General settings -->
+    <string name="totaljobs">Total Jobs</string>
+    <string name="ujm">Find a Job</string>
+    <string name="indeed">Indeed</string>
+    <string name="totalJobPostCode">in-%s?radius=%s</string>
+    <string name="totalJobDescription">jobs/%s/</string>
+    <string name="totalJobDescriptionEmpty">jobs/%s</string>
+    <string name="findAJobSearch">search?q=%s&amp;w=%s/</string>
+    <string name="date_holder">Date</string>
+    <string name="description_holder">Description</string>
+    <string name="company_holder">Company</string>
+    <string name="url_holder">Url</string>
+    <string name="applied_holder">Application Type</string>
+    <string name="location_holder">Location</string>
+    <string name="totaljobssettingkey">total_jobs</string>
+    <string name="ujmsettingkey">find_a_job</string>
+    <string name="indeedsettingkey">indeed</string>
+    <string name="accept_terms">Please accept the terms and conditions</string>
+    <string name="terms_condition_title">Please read this semi important bullsheet</string>
+    <string name="title">Title</string>
+    <string name="favourites">Favourites</string>
+    <string name="settings">Settings</string>
+    <string name="delete">Delete</string>
+    <string name="share">Share</string>
+    <string name="about">About</string>
+    <string name="close">Close</string>
+    <string name="drag_handle">Drag handle</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="job_description">Job Title</string>
+    <string name="job_location">Post Code</string>
+    <string name="date_from">Date From</string>
+    <string name="date_to">Date To</string>
+    <string name="submit">Submit</string>
+    <string name="radius">Radius : Within %d miles</string>
+    <string name="ok">OK</string>
+    <string name="no_archives">Nothing Archived</string>
+    <string name="merge_lists">This will merge the selected lists, creating a new list but leaving your originals untouched, Are you sure you want to merge these %d lists</string>
+    <string name="cant_merge_lists">Please select at least 2 lists to merge</string>
+
+    <string name="colour_pick">Pick a colour</string>
+    <string name="cancel">Cancel</string>
+
+    <string name="red">#ef5350</string>
+    <string name="blue">#2196F3</string>
+    <string name="pink">#F06292</string>
+    <string name="yellow">#FFF176</string>
+    <string name="white">#FFFFFF</string>
+    <string name="orange">#FFB74D</string>
+    <string name="green">#AED581</string>
+    <string name="purple">#9575CD</string>
+
+    <string name="indeed_needs">Indeed needs a job or location</string>
+    <string name="indeedJobSearch">jobs?q=%s&amp;l=%s</string>
+
+    <string name="pref_delete">Delete all saved data</string>
+
+    <!-- Example settings for Data & Sync -->
+
+    <!-- Example settings for Notifications -->
+
+
+</resources>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/save"
+        android:title=""
+        android:icon="@drawable/ic_save_white_24dp"
+        android:orderInCategory="50"
+        app:showAsAction="always">
+    </item>
+
+    <item
+        android:id="@+id/colour"
+        android:title=""
+        android:icon="@drawable/ic_palette_white_24dp"
+        android:orderInCategory="20"
+        app:showAsAction="always">
+    </item>
+    <item
+        android:id="@+id/add"
+        android:title=""
+        android:icon="@drawable/ic_add_white_24dp"
+        android:orderInCategory="10"
+        app:showAsAction="always">
+    </item>
+
+    <item
+        android:id="@+id/empty"
+        android:title=""
+        android:icon="@drawable/ic_more_vert_white_24dp"
+        android:orderInCategory="101"
+        app:showAsAction="always">
+
+        <menu>
+            <item
+                android:id="@+id/preferences"
+                android:title="Settings"
+                android:icon="@drawable/ic_settings_black_24dp"/>
+            <item
+                android:id="@+id/delete"
+                android:title="Delete"
+                android:icon="@drawable/ic_delete_black_24dp"/>
+            <item
+                android:id="@+id/share"
+                android:title="Share"
+                android:icon="@drawable/ic_share_black_24dp"/>
+            <item
+                android:id="@+id/about"
+                android:title="About"
+                android:icon="@drawable/ic_info_outline_black_24dp"/>
+
+        </menu>
+
+    </item>
+
+
+</menu>
