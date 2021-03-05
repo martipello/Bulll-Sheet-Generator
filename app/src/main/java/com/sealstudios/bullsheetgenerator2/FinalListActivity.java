@@ -2,29 +2,27 @@ package com.sealstudios.bullsheetgenerator2;
 
 
 import android.app.Activity;
-import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProviders;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.support.annotation.Nullable;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.ShareCompat;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.helper.ItemTouchHelper;
+
+import androidx.annotation.Nullable;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import com.google.android.material.snackbar.Snackbar;
+import androidx.core.app.ShareCompat;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 
 import com.andremion.counterfab.CounterFab;
 import com.google.android.gms.ads.AdListener;
@@ -39,11 +37,9 @@ import com.sealstudios.bullsheetgenerator2.utils.Constants;
 import com.sealstudios.bullsheetgenerator2.utils.ListConverter;
 import com.sealstudios.bullsheetgenerator2.utils.OnStartDragListener;
 import com.sealstudios.bullsheetgenerator2.utils.SimpleItemTouchHelperCallback;
-import com.sealstudios.bullsheetgenerator2.view_models.FinalListViewModel;
+import com.sealstudios.bullsheetgenerator2.viewModels.FinalListViewModel;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class FinalListActivity extends AppCompatActivity implements
         OnStartDragListener {

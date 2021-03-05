@@ -1,30 +1,35 @@
-package com.sealstudios.bullsheetgenerator2.view_models;
+package com.sealstudios.bullsheetgenerator2.viewModels;
 
 import android.app.Application;
-import android.arch.lifecycle.AndroidViewModel;
-import android.arch.lifecycle.LiveData;
+import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+
 import com.sealstudios.bullsheetgenerator2.database.JobListRepository;
 import com.sealstudios.bullsheetgenerator2.objects.JobList;
 
 import java.util.List;
 
 
-public class FinalListViewModel extends AndroidViewModel {
+public class ArchiveViewModel extends AndroidViewModel {
     private JobListRepository jobListRepository;
-    private LiveData<JobList> jobList;
+    private LiveData<List<JobList>> jobList;
+    private MutableLiveData<String> tag;
 
-    public FinalListViewModel(Application application){
+    public ArchiveViewModel(Application application){
         super(application);
+        tag = new MutableLiveData<>();
         jobListRepository = new JobListRepository(application);
-        jobList = jobListRepository.getJobListWithLimit(1);
+        jobList = jobListRepository.getLists();
+        /*
+        jobList = Transformations.switchMap(tag, myTag ->
+                jobListRepository.getJobListByTag(myTag));
+                */
     }
 
-    public LiveData<JobList> getLiveJobList(){
+    public LiveData<List<JobList>> getLiveJobLists(){
         return jobList;
-    }
 
-    public LiveData<JobList> getLiveJobListById(){
-        return jobList;
     }
 
     public void insertMyJobList(JobList jobList){

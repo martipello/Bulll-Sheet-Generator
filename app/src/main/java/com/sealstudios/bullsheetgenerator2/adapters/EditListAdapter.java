@@ -1,18 +1,15 @@
 package com.sealstudios.bullsheetgenerator2.adapters;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Color;
-import android.support.constraint.ConstraintLayout;
-import android.support.v4.view.MotionEventCompat;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.RecyclerView;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.view.MotionEventCompat;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.util.Linkify;
-import android.util.DisplayMetrics;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -21,7 +18,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.sealstudios.bullsheetgenerator2.EditListActivity;
-import com.sealstudios.bullsheetgenerator2.FinalListActivity;
 import com.sealstudios.bullsheetgenerator2.R;
 import com.sealstudios.bullsheetgenerator2.objects.Job;
 import com.sealstudios.bullsheetgenerator2.utils.ItemTouchHelperAdapter;

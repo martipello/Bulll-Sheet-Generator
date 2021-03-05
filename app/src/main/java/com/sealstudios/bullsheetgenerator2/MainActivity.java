@@ -12,15 +12,9 @@ import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
-import android.preference.PreferenceManager;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
+import android.preference.PreferenceManager;
 import android.util.Log;
-import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -34,12 +28,18 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.material.snackbar.Snackbar;
 import com.sealstudios.bullsheetgenerator2.intro.MyIntro;
 import com.sealstudios.bullsheetgenerator2.jobtasks.FindAJobAsyncTask;
 import com.sealstudios.bullsheetgenerator2.jobtasks.IndeedAsyncTask;
@@ -49,7 +49,6 @@ import com.sealstudios.bullsheetgenerator2.utils.Constants;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
@@ -59,21 +58,18 @@ import hotchemi.android.rate.AppRate;
 import hotchemi.android.rate.OnClickButtonListener;
 
 import static com.sealstudios.bullsheetgenerator2.utils.Constants.PERMISSION_ACCESS_FINE_LOCATION;
-import static com.sealstudios.bullsheetgenerator2.utils.DateListGenerator.getDates;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, GoogleApiClient.ConnectionCallbacks,
-        GoogleApiClient.OnConnectionFailedListener, DatePickerDialog.OnDateSetListener{
+        GoogleApiClient.OnConnectionFailedListener, DatePickerDialog.OnDateSetListener {
 
     private EditText jobDescriptionEditText, jobLocationEditText;
     private TextView radiusText;
-    private ProgressBar progressBar;
     private CircularProgressButton submit;
     private Button dateTo, dateFrom;
     private ImageButton lctnBtn;
     private AdView mAdView;
     private int radius = 1;
     private DatePickerDialogFragment mDatePickerDialogFragment;
-    private InterstitialAd mInterstitialAd;
     private GoogleApiClient mGoogleApiClient;
     private Location mLastLocation;
     public static final int FLAG_START_DATE = 0;
@@ -102,69 +98,62 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setUpSeekBar(sb);
         mDatePickerDialogFragment = new DatePickerDialogFragment();
         submit = findViewById(R.id.submit_btn);
-        submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                validateData();
-                submit.startAnimation();
-            }
+        submit.setOnClickListener(v -> {
+            validateData();
+            submit.startAnimation();
         });
         lctnBtn = findViewById(R.id.get_location_button);
-        lctnBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (checkPermission(MainActivity.this)) {
-                    initializaGoogleApi();
-                } else {
-                    requestPermission(MainActivity.this);
-                }
+        lctnBtn.setOnClickListener(v -> {
+            if (checkPermission(MainActivity.this)) {
+                initializaGoogleApi();
+            } else {
+                requestPermission(MainActivity.this);
             }
         });
-        final String[] outcomeArray = getResources().getStringArray(R.array.outcomes);
+
         mAdView = findViewById(R.id.adView);
         AdRequest adRequestBanner = new AdRequest.Builder()
                 .build();
         mAdView.loadAd(adRequestBanner);
     }
-    Thread t = new Thread(new Runnable() {
-        @Override
-        public void run() {
-            SharedPreferences getPrefs = PreferenceManager
-                    .getDefaultSharedPreferences(getBaseContext());
-            boolean isFirstStart = getPrefs.getBoolean("firstStarted", true);
-            if (isFirstStart) {
-                Intent i = new Intent(MainActivity.this, MyIntro.class);
-                startActivity(i);
-                SharedPreferences.Editor e = getPrefs.edit();
-                e.putBoolean("firstStarted", false);
-                e.apply();
-            }
+
+    Thread t = new Thread(() -> {
+        SharedPreferences getPrefs = PreferenceManager
+                .getDefaultSharedPreferences(getBaseContext());
+        boolean isFirstStart = getPrefs.getBoolean("firstStarted", true);
+        if (isFirstStart) {
+            Intent i = new Intent(MainActivity.this, MyIntro.class);
+            startActivity(i);
+            SharedPreferences.Editor e = getPrefs.edit();
+            e.putBoolean("firstStarted", false);
+            e.apply();
         }
     });
-    public void callRateApp(){
+
+    public void callRateApp() {
         AppRate.with(this)
-                .setInstallDays(1) // default 10, 0 means install day.
-                .setLaunchTimes(5) // default 10
-                .setRemindInterval(1) // default 1
-                .setShowLaterButton(true) // default true
-                .setDebug(false) // default false
-                .setOnClickButtonListener(new OnClickButtonListener() { // callback listener.
-                    @Override
-                    public void onClickButton(int which) {
-                        Intent intent = new Intent(MainActivity.this, WebView.class);
-                        startActivity(intent);
-                    }
+                .setInstallDays(1)
+                .setLaunchTimes(5)
+                .setRemindInterval(1)
+                .setShowLaterButton(true)
+                .setDebug(false)
+                .setOnClickButtonListener(which -> {
+                    Intent intent = new Intent(MainActivity.this, WebView.class);
+                    startActivity(intent);
                 })
                 .monitor();
         AppRate.showRateDialogIfMeetsConditions(this);
     }
-    public int getRadius(){
+
+    public int getRadius() {
         return radius;
     }
-    public void setRadius(int i){
+
+    public void setRadius(int i) {
         this.radius = i;
     }
-    public void setUpSeekBar(SeekBar sb){
+
+    public void setUpSeekBar(SeekBar sb) {
         sb.setProgress(1);
         radiusText.setText(getString(R.string.radius, seekValue(getRadius())));
         sb.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -187,58 +176,53 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
     }
-    public void validateData(){
+
+    public void validateData() {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         boolean totaljobsSrc = sharedPreferences.getBoolean(Constants.TOTAL_JOBS, true);
         boolean fajSrc = sharedPreferences.getBoolean(Constants.FIND_A_JOB, true);
-        boolean indeedSrc = sharedPreferences.getBoolean(Constants.INDEED,true);
-        if (!totaljobsSrc && !fajSrc && !indeedSrc){
-            Snackbar.make(jobLocationEditText,"Enable a site in settings", Snackbar.LENGTH_SHORT).show();
+        boolean indeedSrc = sharedPreferences.getBoolean(Constants.INDEED, true);
+        if (!totaljobsSrc && !fajSrc && !indeedSrc) {
+            Snackbar.make(jobLocationEditText, "Enable a site in settings", Snackbar.LENGTH_SHORT).show();
             submit.revertAnimation();
-        }else{
+        } else {
             //if no date is picked use today
-            if(dateFrom.getText().toString().equals("Date From")){
+            if (dateFrom.getText().toString().equals("Date From")) {
                 final Calendar c = Calendar.getInstance();
-                int year = c.get(Calendar.YEAR);
-                int month = c.get(Calendar.MONTH);
-                int day = c.get(Calendar.DAY_OF_MONTH);
-                SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyy",Locale.ENGLISH);
+                SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyy", Locale.ENGLISH);
                 dateFrom.setText(format.format(c.getTime()));
             }
             //if no date is picked use today
-            if(dateTo.getText().toString().equals("Date To")){
+            if (dateTo.getText().toString().equals("Date To")) {
                 final Calendar c = Calendar.getInstance();
-                int year = c.get(Calendar.YEAR);
-                int month = c.get(Calendar.MONTH);
-                c.add(Calendar.DAY_OF_MONTH,2);
-                int day = c.get(Calendar.DAY_OF_MONTH);
-                SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyy",Locale.ENGLISH);
+                c.add(Calendar.DAY_OF_MONTH, 2);
+                SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyy", Locale.ENGLISH);
                 dateTo.setText(format.format(c.getTime()));
             }
             editor.putString(Constants.DATE_FROM, dateFrom.getText().toString());
             editor.putString(Constants.DATE_TO, dateTo.getText().toString());
             editor.apply();
 
-            if (totaljobsSrc){
-                Log.d(TAG,"validateTotalJobs");
+            if (totaljobsSrc) {
+                Log.d(TAG, "validateTotalJobs");
                 Constants.JOB_LISTS_TO_RETURN++;
                 Constants.TOTAL_JOBS_BOOLEAN = true;
                 validateTotalJobs();
             }
-            if (fajSrc){
-                Log.d(TAG,"validateFindAJob");
+            if (fajSrc) {
+                Log.d(TAG, "validateFindAJob");
                 Constants.JOB_LISTS_TO_RETURN++;
                 Constants.FIND_A_JOB_BOOLEAN = true;
                 validateFindAJob();
             }
-            if (indeedSrc){
-                if (jobLocationEditText.getText().toString().isEmpty() && jobDescriptionEditText.getText().toString().isEmpty()){
-                    Snackbar.make(jobLocationEditText,R.string.indeed_needs,Snackbar.LENGTH_LONG).show();
-                    if (!fajSrc && !totaljobsSrc){
+            if (indeedSrc) {
+                if (jobLocationEditText.getText().toString().isEmpty() && jobDescriptionEditText.getText().toString().isEmpty()) {
+                    Snackbar.make(jobLocationEditText, R.string.indeed_needs, Snackbar.LENGTH_LONG).show();
+                    if (!fajSrc && !totaljobsSrc) {
                         submit.revertAnimation();
                     }
-                }else{
+                } else {
                     Constants.JOB_LISTS_TO_RETURN++;
                     Constants.INDEED_BOOLEAN = true;
                     validateIndeed();
@@ -246,78 +230,82 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
     }
-    public void validateIndeed(){
+
+    public void validateIndeed() {
         String location = jobLocationEditText.getText().toString();
         String description = jobDescriptionEditText.getText().toString();
-        if (!location.isEmpty()){
-            location = location.trim().replaceAll(" " , "+");
+        if (!location.isEmpty()) {
+            location = location.trim().replaceAll(" ", "+");
         }
-        if (!description.isEmpty()){
-            description = description.trim().replaceAll(" ","+");
+        if (!description.isEmpty()) {
+            description = description.trim().replaceAll(" ", "+");
         }
-        String searchUrl = Constants.INDEED_URL + getString(R.string.indeedJobSearch , description , location);
+        String searchUrl = Constants.INDEED_URL + getString(R.string.indeedJobSearch, description, location);
         getIndeedResults(searchUrl);
     }
-    public void validateFindAJob(){
+
+    public void validateFindAJob() {
         String location = jobLocationEditText.getText().toString();
         String description = jobDescriptionEditText.getText().toString();
-        if (!location.isEmpty()){
-            location = location.trim().replaceAll(" " , "+");
+        if (!location.isEmpty()) {
+            location = location.trim().replaceAll(" ", "+");
         }
-        if (!description.isEmpty()){
-            description = description.trim().replaceAll(" ","+");
+        if (!description.isEmpty()) {
+            description = description.trim().replaceAll(" ", "+");
         }
-        String searchUrl = Constants.FIND_A_JOB_URL + getString(R.string.findAJobSearch , description , location);
+        String searchUrl = Constants.FIND_A_JOB_URL + getString(R.string.findAJobSearch, description, location);
         getFindAJobResults(searchUrl);
     }
-    public void validateTotalJobs(){
+
+    public void validateTotalJobs() {
         String location = jobLocationEditText.getText().toString();
         String description = jobDescriptionEditText.getText().toString();
         String radius;
 
-        if (!location.isEmpty() && !location.contains(" ")){
-            location = new StringBuilder(location).insert(location.length()-3, " ").toString();
+        if (!location.isEmpty() && !location.contains(" ")) {
+            location = new StringBuilder(location).insert(location.length() - 3, " ").toString();
         }
-        if (getRadius() < 1){
+        if (getRadius() < 1) {
             radius = "5";
-        }else{
+        } else {
             radius = String.valueOf(seekValue(getRadius()));
         }
         String totalJobsUrl = Constants.TOTAL_JOBS_URL;
-        String locationUrl = getString(R.string.totalJobPostCode, location.replaceAll(" ","-"),radius);
-        String descriptionUrl = getString(R.string.totalJobDescription, description.toLowerCase().trim().replaceAll(" ","-"));
+        String locationUrl = getString(R.string.totalJobPostCode, location.replaceAll(" ", "-"), radius);
+        String descriptionUrl = getString(R.string.totalJobDescription, description.toLowerCase().trim().replaceAll(" ", "-"));
         String siteUrl;
 
         if (description.trim().isEmpty() &&
                 description.length() < 1 &&
                 location.trim().isEmpty() &&
-                location.length() < 1){
-            siteUrl = totalJobsUrl + getString(R.string.totalJobDescriptionEmpty,locationUrl);
+                location.length() < 1) {
+            siteUrl = totalJobsUrl + getString(R.string.totalJobDescriptionEmpty, locationUrl);
             getTotalJobsResults(siteUrl);
-        }
-        else if (description.trim().isEmpty() && description.length() < 1){
-            siteUrl = totalJobsUrl + getString(R.string.totalJobDescriptionEmpty,locationUrl);
+        } else if (description.trim().isEmpty() && description.length() < 1) {
+            siteUrl = totalJobsUrl + getString(R.string.totalJobDescriptionEmpty, locationUrl);
             getTotalJobsResults(siteUrl);
-        }
-        else if (location.trim().isEmpty() && location.length() < 1){
+        } else if (location.trim().isEmpty() && location.length() < 1) {
             siteUrl = totalJobsUrl + descriptionUrl;
             getTotalJobsResults(siteUrl);
-        }
-        else{
+        } else {
             siteUrl = totalJobsUrl + descriptionUrl + locationUrl;
             getTotalJobsResults(siteUrl);
         }
     }
-    public void getTotalJobsResults(String siteUrl){
+
+    public void getTotalJobsResults(String siteUrl) {
         new TotalJobsAsyncTask(submit).execute(siteUrl);
     }
-    public void getFindAJobResults(String siteUrl){
+
+    public void getFindAJobResults(String siteUrl) {
         new FindAJobAsyncTask(submit).execute(siteUrl);
     }
-    public void getIndeedResults(String siteUrl){
+
+    public void getIndeedResults(String siteUrl) {
         new IndeedAsyncTask(submit).execute(siteUrl);
     }
-    private void initializaGoogleApi(){
+
+    private void initializaGoogleApi() {
         if (mGoogleApiClient == null) {
             mGoogleApiClient = new GoogleApiClient.Builder(this)
                     .addConnectionCallbacks(this)
@@ -327,6 +315,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         mGoogleApiClient.connect();
     }
+
     @Override
     public void onClick(View v) {
         int id = v.getId();
@@ -338,23 +327,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             mDatePickerDialogFragment.show(getFragmentManager(), "DatePickerDialogFragment");
         }
     }
-    public float getConvertedValue(int intValue) {
-        float flValue = 0.0f;
-        flValue = 5f * intValue;
-        return flValue;
 
-    }
-    public int unconvertValue(float intValue) {
-        int flValue = 0;
-        flValue = (int) (intValue / 5f);
-        return flValue;
-
-    }
-    public int seekValue(int i){
+    public int seekValue(int i) {
         return i * 5;
     }
+
     @SuppressLint("ValidFragment")
-    public static class DatePickerDialogFragment extends DialogFragment{
+    public static class DatePickerDialogFragment extends DialogFragment {
 
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -362,16 +341,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             int year = c.get(Calendar.YEAR);
             int month = c.get(Calendar.MONTH);
             int day = c.get(Calendar.DAY_OF_MONTH);
-            return new DatePickerDialog(getActivity(), R.style.DatePickerDialogTheme ,(MainActivity)getActivity(), year, month, day);
+            return new DatePickerDialog(getActivity(), R.style.DatePickerDialogTheme, (MainActivity) getActivity(), year, month, day);
         }
 
     }
+
     public void setFlag(int i) {
         flag = i;
     }
-    public int getFlag(){
+
+    public int getFlag() {
         return flag;
     }
+
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         Calendar cal = new GregorianCalendar(year, month, dayOfMonth);
@@ -383,10 +365,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             dateTo.setText(format.format(cal.getTime()));
         }
     }
-    private boolean checkPermission(Context context){
+
+    private boolean checkPermission(Context context) {
         int result = ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION);
         return result == PackageManager.PERMISSION_GRANTED;
     }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         switch (requestCode) {
@@ -394,20 +378,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     initializaGoogleApi();
                 } else {
-                    Snackbar.make(jobLocationEditText,"Enter a postcode",Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(jobLocationEditText, "Enter a postcode", Snackbar.LENGTH_SHORT).show();
                 }
                 break;
         }
     }
-    private void requestPermission(Context context){
-        if (ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this,Manifest.permission.ACCESS_FINE_LOCATION)){
-            Toast.makeText(context,"GPS permission allows us to access location data. Please allow in App Settings for additional functionality.", Toast.LENGTH_LONG).show();
+
+    private void requestPermission(Context context) {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION)) {
+            Toast.makeText(context, "GPS permission allows us to access location data. Please allow in App Settings for additional functionality.", Toast.LENGTH_LONG).show();
         } else {
             ActivityCompat.requestPermissions(MainActivity.this,
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},PERMISSION_ACCESS_FINE_LOCATION);
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSION_ACCESS_FINE_LOCATION);
         }
     }
-    private void getPostcode(Double longitude, Double latitude){
+
+    private void getPostcode(Double longitude, Double latitude) {
         Geocoder geocoder = new Geocoder(MainActivity.this, Locale.ENGLISH);
         List<Address> addresses = null;
         try {
@@ -415,11 +401,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Address address=null;
-        String addr="";
-        String zipcode="";
-        String city="";
-        String state="";
+        Address address = null;
+        String addr = "";
+        String zipcode = "";
+        String city = "";
+        String state = "";
         if (addresses != null && addresses.size() > 0) {
 
             addr = addresses.get(0).getAddressLine(0) + "," + addresses.get(0).getSubAdminArea();
@@ -437,25 +423,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
     }
+
     @Override
     public void onConnected(Bundle bundle) {
         try {
             mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
                     mGoogleApiClient);
             if (mLastLocation != null) {
-                getPostcode(mLastLocation.getLongitude(),mLastLocation.getLatitude());
+                getPostcode(mLastLocation.getLongitude(), mLastLocation.getLatitude());
             }
         } catch (SecurityException e) {
         }
     }
+
     @Override
     public void onConnectionSuspended(int i) {
 
     }
+
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
-        Snackbar.make(jobLocationEditText,"Failed to get location.",Snackbar.LENGTH_SHORT).show();
+        Snackbar.make(jobLocationEditText, "Failed to get location.", Snackbar.LENGTH_SHORT).show();
     }
+
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
@@ -468,6 +458,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         savedInstanceState.putString("dateTo", dateTo.getText().toString());
         // etc.
     }
+
     @Override
     public void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
@@ -478,16 +469,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         dateFrom.setText(savedInstanceState.getString("dateFrom"));
         dateTo.setText(savedInstanceState.getString("dateTo"));
     }
+
     protected void onStart() {
 
         super.onStart();
     }
+
     protected void onStop() {
         super.onStop();
-        if (mGoogleApiClient != null){
+        if (mGoogleApiClient != null) {
             mGoogleApiClient.disconnect();
         }
     }
+
     @Override
     public void onPause() {
         super.onPause();
@@ -495,6 +489,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             mAdView.pause();
         }
     }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -502,6 +497,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             mAdView.resume();
         }
     }
+
     @Override
     public void onDestroy() {
         if (mAdView != null) {
@@ -509,16 +505,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         super.onDestroy();
     }
+
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main_activity, menu);
         return super.onPrepareOptionsMenu(menu);
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
         return super.onCreateOptionsMenu(menu);
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

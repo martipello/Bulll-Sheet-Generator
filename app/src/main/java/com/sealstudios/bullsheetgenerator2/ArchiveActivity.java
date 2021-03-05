@@ -1,29 +1,26 @@
 package com.sealstudios.bullsheetgenerator2;
 
 
-import android.app.Activity;
-import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProviders;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
-import android.os.Handler;
-import android.support.annotation.Nullable;
-import android.support.constraint.ConstraintLayout;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.support.v7.widget.helper.ItemTouchHelper;
-import android.util.Log;
+
+import androidx.annotation.Nullable;
+
+import com.google.android.material.snackbar.Snackbar;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+import androidx.recyclerview.widget.ItemTouchHelper;
+
 import android.util.SparseBooleanArray;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.android.gms.ads.AdRequest;
@@ -33,15 +30,12 @@ import com.sealstudios.bullsheetgenerator2.adapters.ArchiveAdapter;
 import com.sealstudios.bullsheetgenerator2.objects.Job;
 import com.sealstudios.bullsheetgenerator2.objects.JobList;
 import com.sealstudios.bullsheetgenerator2.utils.Constants;
-import com.sealstudios.bullsheetgenerator2.utils.GridItemTouchHelperCallback;
 import com.sealstudios.bullsheetgenerator2.utils.ListConverter;
 import com.sealstudios.bullsheetgenerator2.utils.OnStartDragListener;
 import com.sealstudios.bullsheetgenerator2.utils.SimpleItemTouchHelperCallback;
-import com.sealstudios.bullsheetgenerator2.view_models.ArchiveViewModel;
-import com.sealstudios.bullsheetgenerator2.view_models.FinalListViewModel;
+import com.sealstudios.bullsheetgenerator2.viewModels.ArchiveViewModel;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -148,12 +142,9 @@ public class ArchiveActivity extends AppCompatActivity implements
 
     public void undoSnackbar(final List<JobList> jobListList, final int[] positions){
         Snackbar snackbar = Snackbar.make(recyclerView,"Item removed.",Snackbar.LENGTH_LONG);
-        snackbar.setAction("Undo", new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                for (JobList jobList : jobListList){
-                    viewModel.insertMyJobList(jobList);
-                }
+        snackbar.setAction("Undo", v -> {
+            for (JobList jobList : jobListList){
+                viewModel.insertMyJobList(jobList);
             }
         });
         snackbar.setActionTextColor(ArchiveActivity.this.getResources().getColor(R.color.colorAccent));
@@ -233,22 +224,11 @@ public class ArchiveActivity extends AppCompatActivity implements
     }
 
     public void progressInvisible(final View v) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                v.setVisibility(View.INVISIBLE);
-            }
-        });
+        runOnUiThread(() -> v.setVisibility(View.INVISIBLE));
     }
 
     public void progressVisible(final View v) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                v.setVisibility(View.VISIBLE);
-
-            }
-        });
+        runOnUiThread(() -> v.setVisibility(View.VISIBLE));
     }
     //progressBar.setVisibility(View.VISIBLE);
 
@@ -260,31 +240,21 @@ public class ArchiveActivity extends AppCompatActivity implements
             builder1.setMessage(R.string.cant_merge_lists);
             builder1.setPositiveButton(
                     R.string.ok,
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            dialog.dismiss();
-                        }
-                    });
+                    (dialog, id) -> dialog.dismiss());
         } else {
             String mergeString = getString(R.string.merge_lists, cardAdapter.getSelectedItemCount());
             builder1.setMessage(mergeString);
             //There are enough selected ask for confirmation
             builder1.setPositiveButton(
                     R.string.yes,
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            viewModel.insertMyJobList(merge(cardAdapter.getSelectedItems()));
-                            cardAdapter.clearSelections();
-                            hideShowMenu(false);
-                        }
+                    (dialog, id) -> {
+                        viewModel.insertMyJobList(merge(cardAdapter.getSelectedItems()));
+                        cardAdapter.clearSelections();
+                        hideShowMenu(false);
                     });
             builder1.setNegativeButton(
                     R.string.no,
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            dialog.cancel();
-                        }
-                    });
+                    (dialog, id) -> dialog.cancel());
         }
         AlertDialog alert11 = builder1.create();
         alert11.show();
@@ -300,19 +270,17 @@ public class ArchiveActivity extends AppCompatActivity implements
         builder1.setCancelable(true);
         builder1.setPositiveButton(
                 R.string.yes,
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        //NavUtils.navigateUpFromSameTask(EditListActivity.this);
-                        int[] selectedPositions = cardAdapter.getSelectedItemsPositions();
-                        ArrayList<JobList> jobListArrayList = new ArrayList<>(cardAdapter.getSelectedItems());
-                        cardAdapter.clearSelections();
-                        for (JobList jobList : jobListArrayList){
-                            viewModel.deleteMyJobList(jobList);
-                        }
-                        undoSnackbar(jobListArrayList,selectedPositions);
-                        checkText(frame_text);
-                        hideShowMenu(false);
+                (dialog, id) -> {
+                    //NavUtils.navigateUpFromSameTask(EditListActivity.this);
+                    int[] selectedPositions = cardAdapter.getSelectedItemsPositions();
+                    ArrayList<JobList> jobListArrayList = new ArrayList<>(cardAdapter.getSelectedItems());
+                    cardAdapter.clearSelections();
+                    for (JobList jobList : jobListArrayList){
+                        viewModel.deleteMyJobList(jobList);
                     }
+                    undoSnackbar(jobListArrayList,selectedPositions);
+                    checkText(frame_text);
+                    hideShowMenu(false);
                 });
         builder1.setNegativeButton(
                 R.string.no,

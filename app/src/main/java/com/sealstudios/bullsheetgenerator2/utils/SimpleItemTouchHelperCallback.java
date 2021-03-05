@@ -1,13 +1,7 @@
 package com.sealstudios.bullsheetgenerator2.utils;
 
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.helper.ItemTouchHelper;
-import android.util.Log;
-
-import com.sealstudios.bullsheetgenerator2.FinalListActivity;
-import com.sealstudios.bullsheetgenerator2.objects.JobList;
-
-import java.util.Arrays;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.ItemTouchHelper;
 
 
 public class SimpleItemTouchHelperCallback extends ItemTouchHelper.Callback {

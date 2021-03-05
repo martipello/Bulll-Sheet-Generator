@@ -1,6 +1,6 @@
 package com.sealstudios.bullsheetgenerator2.database;
 
-import android.arch.persistence.room.Room;
+import androidx.room.Room;
 import android.content.Context;
 
 import com.sealstudios.bullsheetgenerator2.utils.Constants;

@@ -1,8 +1,7 @@
 package com.sealstudios.bullsheetgenerator2.jobtasks;
 
 import android.content.Context;
-import android.support.test.InstrumentationRegistry;
-import android.util.Log;
+import androidx.test.platform.app.InstrumentationRegistry;
 
 import com.sealstudios.bullsheetgenerator2.objects.JobList;
 import com.sealstudios.bullsheetgenerator2.utils.Constants;
@@ -12,8 +11,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Arrays;
-
-import static org.junit.Assert.*;
 
 public class TotalJobsAsyncTaskTest {
 

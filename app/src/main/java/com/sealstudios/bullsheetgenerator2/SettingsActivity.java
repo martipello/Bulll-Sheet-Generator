@@ -8,8 +8,7 @@ import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.preference.SwitchPreference;
-import android.support.v7.app.AlertDialog;
-import android.util.Log;
+import androidx.appcompat.app.AlertDialog;
 
 import com.sealstudios.bullsheetgenerator2.database.JobListRepository;
 import com.sealstudios.bullsheetgenerator2.utils.Constants;

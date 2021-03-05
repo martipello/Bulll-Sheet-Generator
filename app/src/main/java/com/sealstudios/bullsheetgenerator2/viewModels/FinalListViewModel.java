@@ -1,21 +1,20 @@
-package com.sealstudios.bullsheetgenerator2.view_models;
+package com.sealstudios.bullsheetgenerator2.viewModels;
 
 import android.app.Application;
-import android.arch.lifecycle.AndroidViewModel;
-import android.arch.lifecycle.LiveData;
-
+import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
 import com.sealstudios.bullsheetgenerator2.database.JobListRepository;
 import com.sealstudios.bullsheetgenerator2.objects.JobList;
 
 
-public class EditListViewModel extends AndroidViewModel {
+public class FinalListViewModel extends AndroidViewModel {
     private JobListRepository jobListRepository;
     private LiveData<JobList> jobList;
 
-    public EditListViewModel(Application application, int jobId){
+    public FinalListViewModel(Application application){
         super(application);
         jobListRepository = new JobListRepository(application);
-        jobList = jobListRepository.getJobListById(jobId);
+        jobList = jobListRepository.getJobListWithLimit(1);
     }
 
     public LiveData<JobList> getLiveJobList(){

@@ -1,7 +1,7 @@
 package com.sealstudios.bullsheetgenerator2.database;
 
 import android.app.Application;
-import android.arch.lifecycle.LiveData;
+import androidx.lifecycle.LiveData;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;

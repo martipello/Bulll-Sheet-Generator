@@ -1,27 +1,26 @@
 package com.sealstudios.bullsheetgenerator2;
 
 
-import android.app.Activity;
 import android.app.Dialog;
-import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProviders;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
-import android.support.annotation.Nullable;
-import android.support.constraint.ConstraintLayout;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.NavUtils;
-import android.support.v4.app.ShareCompat;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.helper.ItemTouchHelper;
-import android.text.TextUtils;
+
+import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import com.google.android.material.snackbar.Snackbar;
+import androidx.core.app.NavUtils;
+import androidx.core.app.ShareCompat;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.ItemTouchHelper;
+
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -29,17 +28,13 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 
 import com.andremion.counterfab.CounterFab;
-import com.cuboid.cuboidcirclebutton.CuboidButton;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 import com.sealstudios.bullsheetgenerator2.adapters.EditListAdapter;
-import com.sealstudios.bullsheetgenerator2.adapters.JobAdapter;
 import com.sealstudios.bullsheetgenerator2.database.JobListRepository;
 import com.sealstudios.bullsheetgenerator2.objects.Job;
 import com.sealstudios.bullsheetgenerator2.objects.JobList;
@@ -47,11 +42,9 @@ import com.sealstudios.bullsheetgenerator2.utils.Constants;
 import com.sealstudios.bullsheetgenerator2.utils.ListConverter;
 import com.sealstudios.bullsheetgenerator2.utils.OnStartDragListener;
 import com.sealstudios.bullsheetgenerator2.utils.SimpleItemTouchHelperCallback;
-import com.sealstudios.bullsheetgenerator2.view_models.EditListViewModel;
-import com.sealstudios.bullsheetgenerator2.view_models.EditListViewModelFactory;
-import com.sealstudios.bullsheetgenerator2.view_models.FinalListViewModel;
+import com.sealstudios.bullsheetgenerator2.viewModels.EditListViewModel;
+import com.sealstudios.bullsheetgenerator2.viewModels.EditListViewModelFactory;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class EditListActivity extends AppCompatActivity implements
@@ -241,7 +234,7 @@ public class EditListActivity extends AppCompatActivity implements
             wlp.width = WindowManager.LayoutParams.MATCH_PARENT;
             //wlp.flags &= ~WindowManager.LayoutParams.FLAG_DIM_BEHIND;
             window.setAttributes(wlp);
-            final CuboidButton orange,red,yellow,green,white,pink,purple,blue;
+            final Button orange,red,yellow,green,white,pink,purple,blue;
             Button cancel;
             orange = dialog.findViewById(R.id.orange);
             orange.setOnClickListener(this);

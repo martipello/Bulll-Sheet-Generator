@@ -27,10 +27,10 @@
     <string name="totaljobs">Total Jobs</string>
     <string name="ujm">Find a Job</string>
     <string name="indeed">Indeed</string>
-    <string name="totalJobPostCode">in-%s?radius=%s</string>
+    <string name="totalJobPostCode">in-%1$s?radius=%2$s</string>
     <string name="totalJobDescription">jobs/%s/</string>
     <string name="totalJobDescriptionEmpty">jobs/%s</string>
-    <string name="findAJobSearch">search?q=%s&amp;w=%s/</string>
+    <string name="findAJobSearch">search?q=%1$s&amp;w=%2$s/</string>
     <string name="date_holder">Date</string>
     <string name="description_holder">Description</string>
     <string name="company_holder">Company</string>
@@ -75,9 +75,10 @@
     <string name="purple">#9575CD</string>
 
     <string name="indeed_needs">Indeed needs a job or location</string>
-    <string name="indeedJobSearch">jobs?q=%s&amp;l=%s</string>
+    <string name="indeedJobSearch">jobs?q=%1$s&amp;l=%2$s</string>
 
     <string name="pref_delete">Delete all saved data</string>
+    <string name="AD_MOB_AD_UNIT_ID">ca-app-pub-1989939591379723~5141275893</string>
 
     <!-- Example settings for Data & Sync -->
 

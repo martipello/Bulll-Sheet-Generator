@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent"/>
 
 
-    <com.cuboid.cuboidcirclebutton.CuboidButton
+    <Button
         android:layout_width="50dp"
         android:layout_height="50dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,13 +26,9 @@
         app:layout_constraintEnd_toStartOf="@id/blue"
         android:layout_weight="1"
         android:tag="@string/red"
-        app:cub_border_color="@color/lightgrey"
-        app:cub_border_radius="4dp"
-        app:cub_color="@color/red"
-        android:id="@+id/red"
-        app:cub_hover_color="@color/grey" />
+        android:id="@+id/red" />
 
-    <com.cuboid.cuboidcirclebutton.CuboidButton
+    <Button
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_weight="1"
@@ -40,29 +36,21 @@
         app:layout_constraintTop_toTopOf="@id/red"
         app:layout_constraintStart_toEndOf="@id/red"
         app:layout_constraintEnd_toStartOf="@id/green"
-        app:cub_border_color="@color/lightgrey"
-        app:cub_border_radius="4dp"
         android:id="@+id/blue"
-        app:cub_color="@color/blue"
-        app:cub_hover_color="@color/grey"
         />
 
-    <com.cuboid.cuboidcirclebutton.CuboidButton
+    <Button
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_weight="1"
         android:tag="@string/green"
-        app:cub_border_color="@color/lightgrey"
-        app:cub_border_radius="4dp"
         android:id="@+id/green"
-        app:cub_color="@color/green"
-        app:cub_hover_color="@color/grey"
         app:layout_constraintTop_toTopOf="@id/blue"
         app:layout_constraintStart_toEndOf="@id/blue"
         app:layout_constraintEnd_toStartOf="@id/yellow"
         />
 
-    <com.cuboid.cuboidcirclebutton.CuboidButton
+    <Button
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_weight="1"
@@ -71,14 +59,10 @@
         app:layout_constraintTop_toTopOf="@id/green"
         app:layout_constraintStart_toEndOf="@id/green"
         app:layout_constraintEnd_toEndOf="parent"
-        app:cub_border_color="@color/lightgrey"
-        app:cub_border_radius="4dp"
-        app:cub_color="@color/yellow"
-        app:cub_hover_color="@color/grey"
         />
 
 
-    <com.cuboid.cuboidcirclebutton.CuboidButton
+    <Button
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_weight="1"
@@ -87,13 +71,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/red"
         app:layout_constraintEnd_toStartOf="@id/pink"
-        app:cub_border_color="@color/lightgrey"
-        app:cub_border_radius="4dp"
-        app:cub_color="@color/purple"
-        app:cub_hover_color="@color/grey"
         />
 
-    <com.cuboid.cuboidcirclebutton.CuboidButton
+    <Button
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_weight="1"
@@ -101,29 +81,21 @@
         app:layout_constraintStart_toEndOf="@id/purple"
         app:layout_constraintTop_toBottomOf="@id/blue"
         app:layout_constraintEnd_toStartOf="@id/orange"
-        app:cub_border_color="@color/lightgrey"
-        app:cub_border_radius="4dp"
         android:id="@+id/pink"
-        app:cub_color="@color/pink"
-        app:cub_hover_color="@color/grey"
         />
 
-    <com.cuboid.cuboidcirclebutton.CuboidButton
+    <Button
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_weight="1"
-        app:cub_border_color="@color/lightgrey"
         app:layout_constraintStart_toEndOf="@id/pink"
         app:layout_constraintTop_toBottomOf="@id/green"
         app:layout_constraintEnd_toStartOf="@id/white"
         android:tag="@string/orange"
-        app:cub_border_radius="4dp"
-        app:cub_color="@color/orange"
         android:id="@+id/orange"
-        app:cub_hover_color="@color/grey"
         />
 
-    <com.cuboid.cuboidcirclebutton.CuboidButton
+    <Button
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_weight="1"
@@ -132,10 +104,6 @@
         app:layout_constraintStart_toEndOf="@id/orange"
         app:layout_constraintTop_toBottomOf="@id/yellow"
         app:layout_constraintEnd_toEndOf="parent"
-        app:cub_border_color="@color/lightgrey"
-        app:cub_border_radius="4dp"
-        app:cub_color="@color/white"
-        app:cub_hover_color="@color/grey"
         />
 
     <Button
@@ -147,4 +115,4 @@
         android:layout_marginTop="5dp"
         app:layout_constraintTop_toBottomOf="@id/pink"/>
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

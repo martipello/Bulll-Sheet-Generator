@@ -61,6 +61,11 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.sealstudios.bullsheetgenerator2.MainActivity" />
         </activity>
+
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="@string/AD_MOB_AD_UNIT_ID"/>
+
     </application>
 
 </manifest>
