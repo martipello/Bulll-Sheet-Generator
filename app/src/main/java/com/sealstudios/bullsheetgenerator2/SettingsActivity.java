@@ -104,7 +104,7 @@ public class SettingsActivity extends PreferenceActivity {
         {
             @Override
             public boolean onPreferenceClick(Preference preference) {
-                Intent i = new Intent(SettingsActivity.this, about.class);
+                Intent i = new Intent(SettingsActivity.this, About.class);
                 startActivity(i);
                 return true;
             }

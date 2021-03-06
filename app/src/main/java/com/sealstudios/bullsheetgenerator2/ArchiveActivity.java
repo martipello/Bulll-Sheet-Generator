@@ -381,7 +381,7 @@ public class ArchiveActivity extends AppCompatActivity implements
                 return true;
             }
             case R.id.about: {
-                Intent myIntent = new Intent(ArchiveActivity.this, about.class);
+                Intent myIntent = new Intent(ArchiveActivity.this, About.class);
                 startActivity(myIntent);
                 return true;
             }

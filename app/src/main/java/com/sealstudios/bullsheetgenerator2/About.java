@@ -7,7 +7,7 @@ import android.webkit.WebView;
 /**
  * Created by marti on 25/03/2017.
  */
-public class about extends AppCompatActivity {
+public class About extends AppCompatActivity {
 
     private WebView webView;
 
@@ -17,8 +17,5 @@ public class about extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle("About");
-
-
-        //gov gateway acc ref T3AD7WPOSF gateway id 2492 4939 9346
     }
 }

@@ -321,7 +321,7 @@ public class FinalListActivity extends AppCompatActivity implements
                 return true;
             }
             case R.id.about: {
-                Intent myIntent = new Intent(FinalListActivity.this, about.class);
+                Intent myIntent = new Intent(FinalListActivity.this, About.class);
                 startActivity(myIntent);
                 return true;
             }

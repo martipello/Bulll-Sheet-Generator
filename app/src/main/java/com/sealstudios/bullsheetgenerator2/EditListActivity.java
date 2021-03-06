@@ -389,7 +389,7 @@ public class EditListActivity extends AppCompatActivity implements
             }
             case R.id.about: {
 
-                Intent myIntent = new Intent(EditListActivity.this, about.class);
+                Intent myIntent = new Intent(EditListActivity.this, About.class);
                 startActivity(myIntent);
 
                 return true;
